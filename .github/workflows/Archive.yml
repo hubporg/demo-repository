@@ -1,0 +1,58 @@
+name: Archive Analytics
+
+on:
+  schedule:
+    # 每天北京时间 01:00
+    - cron: "0 1 * * *"
+      timezone: "Asia/Shanghai"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download analytics
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p DataArchive
+
+          DATE=$(TZ=Asia/Shanghai date +%F)
+          FILE="DataArchive/${DATE}.json"
+
+          curl \
+            --fail \
+            --retry 5 \
+            --retry-delay 10 \
+            --retry-all-errors \
+            -L \
+            -H "Accept: application/json" \
+            "https://addon-analytics.hubp.org/stats/summary" \
+            -o "$FILE"
+
+          # 验证返回是否为 JSON
+          jq empty "$FILE" >/dev/null
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add DataArchive
+
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+
+          git commit -m "Archive analytics $(TZ=Asia/Shanghai date +%F)"
+          git push
