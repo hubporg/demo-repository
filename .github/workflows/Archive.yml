@@ -41,6 +41,59 @@ jobs:
           # 验证返回是否为 JSON
           jq empty "$FILE" >/dev/null
 
+      - name: Merge last 60 days
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ARCHIVE_DIR="DataArchive"
+          OUT="${ARCHIVE_DIR}/last60days.json"
+          WINDOW_DAYS=60
+
+          CUTOFF=$(TZ=Asia/Shanghai date -d "${WINDOW_DAYS} days ago" +%F)
+          NOW=$(TZ=Asia/Shanghai date +%Y-%m-%dT%H:%M:%S%:z)
+
+          # 只挑 YYYY-MM-DD.json 形式的源数据，合并产物不参与
+          FILES=()
+          for f in "${ARCHIVE_DIR}"/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].json; do
+            [ -e "$f" ] || continue
+            d="${f##*/}"
+            d="${d%.json}"
+            if [[ "$d" > "$CUTOFF" || "$d" == "$CUTOFF" ]]; then
+              FILES+=("$f")
+            fi
+          done
+
+          if [ "${#FILES[@]}" -eq 0 ]; then
+            echo "No daily files within the last ${WINDOW_DAYS} days; leaving ${OUT} untouched."
+            exit 0
+          fi
+
+          mapfile -t FILES < <(printf '%s\n' "${FILES[@]}" | sort)
+
+          RECORDS=$(mktemp)
+          trap 'rm -f "$RECORDS"' EXIT
+          : > "$RECORDS"
+
+          for f in "${FILES[@]}"; do
+            d="${f##*/}"
+            d="${d%.json}"
+            if jq empty "$f" >/dev/null 2>&1; then
+              jq -c --arg d "$d" '{date: $d, data: .}' "$f" >> "$RECORDS"
+            else
+              echo "::warning::skipping invalid JSON: $f" >&2
+            fi
+          done
+
+          jq -s \
+            --arg generated_at "$NOW" \
+            --argjson window_days "$WINDOW_DAYS" \
+            '{generated_at: $generated_at, window_days: $window_days, from: .[0].date, to: .[-1].date, count: length, records: .}' \
+            "$RECORDS" > "$OUT"
+
+          jq empty "$OUT" >/dev/null
+          echo "Wrote ${OUT}: $(jq -r '.count' "$OUT") days ($(jq -r '.from' "$OUT") -> $(jq -r '.to' "$OUT"))"
+
       - name: Commit changes
         shell: bash
         run: |
