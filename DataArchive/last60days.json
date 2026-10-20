@@ -1,36 +1,10 @@
 {
-  "generated_at": "2026-10-20T05:16:36+08:00",
+  "generated_at": "2026-10-21T04:10:41+08:00",
   "window_days": 60,
-  "from": "2026-08-21",
-  "to": "2026-10-20",
+  "from": "2026-08-22",
+  "to": "2026-10-21",
   "count": 61,
   "records": [
-    {
-      "date": "2026-08-21",
-      "data": {
-        "total_jumps": 9396,
-        "total_installs": 5493,
-        "installs_by_browser": {
-          "chromium": 5407,
-          "firefox": 86
-        },
-        "jumps_by_browser": {
-          "chromium": 9097,
-          "firefox": 299
-        },
-        "installs_by_version": {
-          "1.0.8": 100,
-          "1.0.9": 4658,
-          "1.1.0": 6
-        },
-        "jumps_by_version": {
-          "1.0.8": 132,
-          "1.0.9": 8415,
-          "1.1.0": 8
-        },
-        "last_updated": "2026-08-20T16:55:07.780Z"
-      }
-    },
     {
       "date": "2026-08-22",
       "data": {
@@ -1615,6 +1589,34 @@
           "1.1.1": 23231
         },
         "last_updated": "2026-10-19T20:48:00.211Z"
+      }
+    },
+    {
+      "date": "2026-10-21",
+      "data": {
+        "total_jumps": 440056,
+        "total_installs": 26831,
+        "installs_by_browser": {
+          "chromium": 26343,
+          "firefox": 488
+        },
+        "jumps_by_browser": {
+          "chromium": 437852,
+          "firefox": 2204
+        },
+        "installs_by_version": {
+          "1.0.8": 100,
+          "1.0.9": 7153,
+          "1.1.0": 11537,
+          "1.1.1": 7312
+        },
+        "jumps_by_version": {
+          "1.0.8": 132,
+          "1.0.9": 11610,
+          "1.1.0": 403757,
+          "1.1.1": 23716
+        },
+        "last_updated": "2026-10-20T19:45:47.043Z"
       }
     }
   ]
