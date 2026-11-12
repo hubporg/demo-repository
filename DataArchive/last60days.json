@@ -1,36 +1,10 @@
 {
-  "generated_at": "2026-11-12T07:08:37+08:00",
+  "generated_at": "2026-11-13T06:28:06+08:00",
   "window_days": 60,
-  "from": "2026-09-13",
-  "to": "2026-11-12",
+  "from": "2026-09-14",
+  "to": "2026-11-13",
   "count": 61,
   "records": [
-    {
-      "date": "2026-09-13",
-      "data": {
-        "total_jumps": 204706,
-        "total_installs": 11543,
-        "installs_by_browser": {
-          "chromium": 11389,
-          "firefox": 154
-        },
-        "jumps_by_browser": {
-          "chromium": 203799,
-          "firefox": 907
-        },
-        "installs_by_version": {
-          "1.0.8": 100,
-          "1.0.9": 6905,
-          "1.1.0": 3809
-        },
-        "jumps_by_version": {
-          "1.0.8": 132,
-          "1.0.9": 11131,
-          "1.1.0": 192602
-        },
-        "last_updated": "2026-09-12T17:46:28.118Z"
-      }
-    },
     {
       "date": "2026-09-14",
       "data": {
@@ -1833,6 +1807,76 @@
           }
         },
         "last_updated": "2026-11-11T23:02:59.997Z"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "data": {
+        "total_jumps": 819667,
+        "total_installs": 42977,
+        "installs_by_browser": {
+          "chromium": 42255,
+          "firefox": 722
+        },
+        "jumps_by_browser": {
+          "chromium": 816332,
+          "firefox": 3335
+        },
+        "installs_by_version": {
+          "1.0.8": 100,
+          "1.0.9": 7238,
+          "1.1.0": 11908,
+          "1.1.1": 22989,
+          "1.2.0": 3,
+          "0.3.1": 4,
+          "0.4.0": 6
+        },
+        "jumps_by_version": {
+          "1.0.8": 132,
+          "1.0.9": 11753,
+          "1.1.0": 404307,
+          "1.1.1": 402623,
+          "1.2.0": 7,
+          "0.3.1": 3,
+          "0.4.0": 1
+        },
+        "installs_by_source": {
+          "extension": 42967,
+          "userscript": 10
+        },
+        "jumps_by_source": {
+          "extension": 819663,
+          "userscript": 4
+        },
+        "installs_by_source_version": {
+          "extension": {
+            "1.0.8": 100,
+            "1.0.9": 7238,
+            "1.1.0": 11908,
+            "1.1.1": 22989,
+            "1.2.0": 3,
+            "unknown": 729
+          },
+          "userscript": {
+            "0.3.1": 4,
+            "0.4.0": 6
+          }
+        },
+        "jumps_by_source_version": {
+          "extension": {
+            "1.0.8": 132,
+            "1.0.9": 11753,
+            "1.1.0": 404307,
+            "1.1.1": 402623,
+            "1.2.0": 7,
+            "unknown": 841
+          },
+          "userscript": {
+            "0.3.1": 3,
+            "0.4.0": 1
+          }
+        },
+        "last_updated": "2026-11-12T22:14:02.396Z"
       }
     }
   ]
